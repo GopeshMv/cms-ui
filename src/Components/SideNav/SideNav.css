@@ -1,0 +1,194 @@
+.SideNav {
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px;
+    gap: 35px;
+
+    width: 350px;
+    min-width: 350px;
+    height: 100%;
+    
+
+    background: #CCCDFA;
+    border-radius: 10px;
+
+}
+
+.Logo {
+    width: 90%;
+    height: 77px;
+
+    background: #F75454;
+    border-radius: 5px;
+
+}
+
+.UserCard {
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    gap: 12px;
+
+    width: 100%;
+    height: fit-content;
+
+    background: #E6E7FE;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px;
+
+}
+
+.UserCard-icon * {
+    width: 60px;
+    height: 60px;
+}
+
+.UserDetails {
+    display: flex;
+    flex-direction: column;
+    font-weight: 400;
+    gap: 10px;
+}
+
+.UserName {
+    font-size: 18px;
+    line-height: 20px;
+}
+
+.UserUUID {
+    font-size: 12px;
+    line-height: 10px;
+}
+
+.Links {
+    /* Links */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    width: 95%;
+    height: 100%;
+    position: relative;
+    /* height: 693px; */
+
+}
+
+.Links > * {
+    /* Inside auto layout */
+    flex: none;
+    order: 2;
+    align-self: stretch;
+    flex-grow: 1;
+}
+
+.TopLinks {
+    /* Top Links */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 10px;
+
+    margin: 0 auto;
+    width: 100%;
+    /* height: 300px; */
+}
+
+.TopLinks > * {
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.Link {
+    /* Link */
+    cursor: pointer;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 10px;
+    gap: 10px;
+
+    width: 100%;
+    height: 50px;
+
+    border-radius: 10px;    
+}
+
+.Link:hover {
+    /* state=active */
+    box-sizing: border-box;
+    background: #FFFFFF;
+    border-left: 10px solid #080930;
+
+    transition-duration: 200ms;
+}
+
+.Link > * {
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.Link-icon * {
+    width: 30px;
+    height: 30px;
+}
+
+.Link-text {
+    /* Home */
+    width: 58px;
+    height: 32px;
+
+    width: 58px;
+    height: 32px;
+    font-size: 18px;
+    line-height: 32px;
+}
+
+.BottomLinks {
+    /* Bottom Links */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0px;
+    gap: 10px;
+
+    margin: 0 auto;
+    width: 100%;
+    /* height: 140px; */
+
+}
+
+.BottomLinks > * {
+    /* Inside auto layout */
+    flex: none;
+    order: 1;
+    flex-grow: 0;
+}
+
+.Copyright {
+    font-weight: 100;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+}

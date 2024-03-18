@@ -1,0 +1,35 @@
+.TopNav {
+    /* TopNav */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 30px;
+
+    width: 100%;
+    height: auto;
+
+    background: #CCCDFA;
+    border-radius: 10px;
+}
+
+.TopNav * {
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.welcomeMessage {
+    font-weight: 400;
+    font-size: 28px;
+    /* identical to box height */
+    text-align: center;
+}
+
+.notification-icon * {
+    width: 30px;
+    height: 30px;
+}
