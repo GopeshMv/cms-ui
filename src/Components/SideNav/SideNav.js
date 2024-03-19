@@ -23,30 +23,30 @@ function SideNav() {
             </div>
             <div className="Links">
                 <div className="TopLinks">
-                    <div className="Link">
+                    <a href="/" className="Link">
                         <div className="Link-icon">
                             <img src={home_logo} alt=""></img>
                         </div>
                         <span className="Link-text">Home</span>
-                    </div>
-                    <div className="Link">
+                    </a>
+                    <a href="account" className="Link">
                         <div className="Link-icon">
                             <img src={account_logo} alt=""></img>
                         </div>
                         <span className="Link-text">Account</span>
-                    </div>
-                    <div className="Link">
+                    </a>
+                    <a href="payment" className="Link">
                         <div className="Link-icon">
                             <img src={payment_logo} alt=""></img>
                         </div>
                         <span className="Link-text">Payment</span>
-                    </div>
-                    <div className="Link">
+                    </a>
+                    <a href="transactions" className="Link">
                         <div className="Link-icon">
                            <img src={transactions_logo} alt=""></img>
                         </div>
                         <span className="Link-text">Transactions</span>
-                    </div>
+                    </a>
                     
                 </div>
                 <div className="BottomLinks">
