@@ -1,0 +1,242 @@
+.BillingForm {
+    /* Billing Form */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 20px;
+
+    width: 500px;
+    height: 100%;
+    /* position: relative; */
+
+    border-radius: 10px;
+
+    background: #E3E5FA;
+}
+
+.BillingForm * {
+    font-size: 14px;
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+}
+
+.BillingFormHeader {
+    /* Form Header */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+
+    width: 537px;
+    height: 64.51px;
+}
+
+.FormTitle {
+    /* Payment */
+
+    width: 100%;
+
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    text-align: center;
+
+    color: #000000;
+}
+
+.FormDetail {
+    /* Billing Information */
+
+    width: 100%;
+
+
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+.BillingBody {
+    /* Billing Body */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+    gap: 20px;
+
+    height: 100%;
+}
+
+.BillingDetails {
+    /* Billing Details */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px 40px;
+    gap: 8px;
+
+    width: 100%;
+}
+
+.BillingDetails > * {
+    /* Inside auto layout */
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+}
+
+.BillingTextBox {
+    /* Text Box */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px 18px;
+    gap: 10px;
+
+    width: 407px;
+    height: 40px;
+
+    border: 1px solid #000000;
+}
+
+.BillingLabel {
+    /* Name */
+
+    height: 14px;
+
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 17px;
+
+    color: #000000;
+}
+
+
+.BillingDualContainer {
+    /* City-State */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+
+    width: 407px;
+    height: 63px;
+}
+
+
+.BillingSmallTextBox {
+    /* Small Text Box */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 18px;
+    gap: 10px;
+
+    width: 201.5px;
+    height: 40px;
+
+    border: 1px solid #000000;
+    background-color: white;
+}
+
+#country {
+    padding: 0;
+}
+
+.BillingLastSection {
+    /* Last Section */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0px;
+    gap: 4px;
+
+    width: 100%;
+    height: 89px;
+
+    margin-top: 10px;
+}
+
+.BillingSaveInfo {
+    /* Save info */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    /* gap: 5px; */
+
+    width: 407px;
+    height: 24px;
+}
+
+.BillingSaveInfoCheckbox {
+    width: 16px;
+}
+
+.saveInfoText {
+    font-size: 10px;
+}
+
+.BillingNextButton {
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 0px;
+    gap: 10px;
+
+    width: 407px;
+    height: 49px;
+
+    background: #0A2E3A;
+    border: 1px solid #000000;
+}
+
+.BillingNext {
+    /* Next */
+
+    width: 49px;
+    height: 29px;
+
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    /* identical to box height */
+
+    color: #FFFFFF;
+
+}
