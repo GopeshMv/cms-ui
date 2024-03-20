@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import BillingForm from "./BillingForm/BillingForm";
 import PaymentForm from "./PaymentForm/PaymentForm";
 
 function Payment() {
+    const [billingCompleted, setBillingCompleted] = useState(false);
+    
     return (
         <>
-            <BillingForm />
-            <PaymentForm />
+            { !billingCompleted ?
+                <BillingForm billingCompleted={setBillingCompleted}/> :
+                <PaymentForm billingCompleted={setBillingCompleted} /> 
+            }
         </>
     );
 }

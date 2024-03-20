@@ -2,9 +2,18 @@ import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import "./BillingForm.css";
 
-function BillingForm() {
+function BillingForm({billingCompleted}) {
     const [countries, setCountries] = useState([]);
-    const [selectedCountry, setSelectedCountry] = useState({});
+
+    const [billingForm, setBillingForm] = useState({
+        name: '',
+        address: '',
+        addressL2: '',
+        city: '',
+        state: '',
+        zip: '',
+        country: ''
+    });
   
     useEffect(() => {
       fetch(
@@ -12,13 +21,37 @@ function BillingForm() {
       )
         .then((response) => response.json())
         .then((data) => {
-          setCountries(data.countries);
-          setSelectedCountry(data.userSelectValue);
+            setCountries(data.countries);
+            setBillingForm({
+                ...billingForm,
+                country: data.userSelectValue
+        });
         });
     }, []);
+    
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setBillingForm({
+            ...billingForm,
+            [name]: value
+        });
+    };
+
+    const handleCountryChange = (value, actionMeta) => {
+        setBillingForm({
+            ...BillingForm,
+            country: value
+        });
+        console.log(value);
+    }
+
+    const handleSubmit = (event) => {
+        billingCompleted(true);
+    }
 
     return (
-        <form className="BillingForm">
+        <form className="BillingForm" onSubmit={handleSubmit}>
             <div className="BillingFormHeader">
                 <span className="FormTitle">Payment</span>
                 <span className="FormDetail">Billing Information</span>
@@ -26,32 +59,32 @@ function BillingForm() {
             <div className="BillingBody">
                 <div className="BillingDetails">
                     <label for="billingName" className="BillingLabel">Name</label>
-                    <input type="text" id="billingName" name="name" className="BillingTextBox"></input>
+                    <input type="text" id="billingName" name="name" className="BillingTextBox" value={billingForm.name} onChange={handleChange}></input>
 
                     <label for="billingAddress" className="BillingLabel">Billing Address</label>
-                    <input type="text" id="billingAddress" name="address" className="BillingTextBox"></input>
+                    <input type="text" id="billingAddress" name="address" className="BillingTextBox" value={billingForm.address} onChange={handleChange}></input>
 
                     <label for="billingAddressL2" className="BillingLabel">Billing Address, Line 2</label>
-                    <input type="text" id="billingAddressL2" name="addressL2" className="BillingTextBox"></input>
+                    <input type="text" id="billingAddressL2" name="addressL2" className="BillingTextBox" value={billingForm.addressL2} onChange={handleChange}></input>
 
                     <div className="BillingDualContainer">
                         <div className="BillingDualItem">
                             <label for="city" className="BillingLabel">City</label>
-                            <input type="text" id="city" name="city" className="BillingSmallTextBox"></input>
+                            <input type="text" id="city" name="city" className="BillingSmallTextBox" value={billingForm.city} onChange={handleChange}></input>
                         </div>
                         <div className="BillingDualItem">
                             <label for="state" className="BillingLabel">State/Province</label>
-                            <input type="text" id="state" name="state" className="BillingSmallTextBox"></input>
+                            <input type="text" id="state" name="state" className="BillingSmallTextBox" value={billingForm.state} onChange={handleChange}></input>
                         </div>
                     </div>
                     <div className="BillingDualContainer">
                         <div className="BillingDualItem">
                             <label for="zip" className="BillingLabel">Zip or Postal Code</label>
-                            <input type="text" id="zip" name="zip" className="BillingSmallTextBox"></input>
+                            <input type="text" id="zip" name="zip" className="BillingSmallTextBox" value={billingForm.zip} onChange={handleChange}></input>
                         </div>
                         <div className="BillingDualItem">
                             <label for="country" className="BillingLabel">Country</label>
-                            <Select id="country" name="country" className="BillingSmallTextBox" options={countries} value={selectedCountry} onChange={(selectedOption) => setSelectedCountry(selectedOption)} 
+                            <Select id="country" name="country" className="BillingSmallTextBox" options={countries} value={billingForm.country} onChange={handleCountryChange} 
                             
                             styles={{
                                 control: (base) => ({
@@ -76,9 +109,9 @@ function BillingForm() {
                     </div>
 
                     <div className="BillingLastSection">
-                        <div className="BillingNextButton">
+                        <button type="submit" className="BillingNextButton">
                             <span className="BillingNext">Next</span>
-                        </div>
+                        </button>
                     </div>
                 </div>
             </div>

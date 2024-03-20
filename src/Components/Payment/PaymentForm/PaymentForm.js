@@ -1,9 +1,13 @@
 import React from "react";
 import "./PaymentForm.css";
+import leftArrow from "../../../utils/svg/left_arrow.svg";
 
-function PaymentForm() {
+function PaymentForm({billingCompleted}) {
     return (
         <form className="PaymentForm">
+            <div className="backArrowContainer" onClick={(event) => billingCompleted(false)}>
+                <img src={leftArrow} alt="" className="PaymentBackArrow"></img>
+            </div>
             <div className="BillingFormHeader">
                 <span className="FormTitle">Payment</span>
                 <span className="FormDetail">Add your card details</span>
@@ -29,7 +33,7 @@ function PaymentForm() {
                     </div>
 
                     <div className="BillingNextButton Paynow">
-                        <span className="BillingNext">Next</span>
+                        <span className="BillingNext">Pay Now</span>
                     </div>
 
                 </div>

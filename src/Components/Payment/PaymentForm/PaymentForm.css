@@ -16,10 +16,39 @@
     /* position: relative; */
 
     border-radius: 10px;
+    position: relative;
 
     background: #E3E5FA;
 }
 
+.backArrowContainer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PaymentBackArrow {
+    width: 30px;
+}
+
+.backArrowContainer:hover {
+    border: 1px black solid;
+    background-color: white;
+    transition: 100ms ease-out;
+    transition-property: background-color;
+}
+
+
 .Paynow {
     margin-top: 20px;
+}
+
+.BillingNext {
+    width: 100px;
 }
