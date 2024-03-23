@@ -6,7 +6,6 @@ import Home from './Components/Home/Home';
 import Payment from './Components/Payment/Payment';
 import Transactions from './Components/Transactions/Transactions';
 import Account from './Components/Account/Account';
-import CreditCard from './Components/Card/CreditCard/CreditCard';
 
 
 function App() {

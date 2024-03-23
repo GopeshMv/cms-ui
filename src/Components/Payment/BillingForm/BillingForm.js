@@ -32,9 +32,15 @@ function BillingForm({billingCompleted}) {
 
     const handleChange = (event) => {
         const { name, value } = event.target;
+        let formattedVal = value;
+
+        if (name == "name") {
+            formattedVal = formattedVal.replace(/[^A-Za-z ]/g,"");
+        }
+        console.log(name, formattedVal);
         setBillingForm({
             ...billingForm,
-            [name]: value
+            [name]: formattedVal
         });
     };
 
@@ -44,14 +50,20 @@ function BillingForm({billingCompleted}) {
             country: value
         });
         console.log(value);
-    }
+    };
 
     const handleSubmit = (event) => {
         billingCompleted(true);
-    }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === "Enter") {
+            event.preventDefault();
+        }
+    };
 
     return (
-        <form className="BillingForm" onSubmit={handleSubmit}>
+        <form className="BillingForm" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
             <div className="BillingFormHeader">
                 <span className="FormTitle">Payment</span>
                 <span className="FormDetail">Billing Information</span>
