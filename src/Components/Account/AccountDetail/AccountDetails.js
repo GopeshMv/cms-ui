@@ -6,6 +6,9 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Popover from '@mui/material/Popover';
+import TextField from '@mui/material/TextField';
+import { Box } from "@mui/material";
+
 
 function AccountDetails() {
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -45,7 +48,10 @@ function AccountDetails() {
                                 horizontal: 'left',
                             }}
                         >
-                            <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+                            <Box>
+                            <TextField id="outlined-basic" label="New Password" variant="outlined" sx={{margin:1}} />
+                            <Button variant="contained" sx={{margin:1, marginTop:2}}>Submit</Button>
+                            </Box>
                         </Popover>
                     </Typography>
                 </CardContent>
