@@ -1,0 +1,260 @@
+.custom-card {
+    width: 406px;
+    height: 256px;  
+    position: relative;
+    
+    background: #080930;
+    border-radius: 15px;
+    user-select: none;
+
+    overflow: hidden;
+}
+
+
+.card-details {
+    /* Card Details */
+    width: max-content;
+    height: 50px;
+
+    position: absolute;
+    left: 28.92px;
+    top: 196.27px;
+
+}
+
+.card-holder {
+    /* JOHN DOE */
+    width: max-content;
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+
+    font-weight: 400;
+    font-size: 18.1112px;
+    line-height: 24px;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    
+    color: #FFFFFF;
+}
+
+.card-expiry {
+    /* Expiry */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    gap: 15.09px;
+
+    position: absolute;
+}
+
+.card-expiry-thru {
+    /* THRU */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 2.52px;
+
+    width: 73.45px;
+    height: 16px;
+}
+
+.valid-thru-title {
+    /* VALID THRU */
+
+    width: 25.66px;
+    height: 16px;
+    
+    font-weight: 200;
+    font-size: 6.03706px;
+    line-height: 8px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+.valid-thru-value {
+    /* 02/29 */
+
+    width: 45.28px;
+    height: 15.09px;
+    
+    font-weight: 200;
+    font-size: 14.0865px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+
+}
+
+.card-expiry-from {
+    /* FROM */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+    gap: 2.52px;
+
+    width: 73.45px;
+    height: 16px;
+}
+
+.valid-from-title {
+
+    /* VALID THRU */
+
+    width: 25.66px;
+    height: 16px;
+
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 6.03706px;
+    line-height: 8px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.valid-from-value {
+    /* 02/24 */
+
+    width: 45.28px;
+    height: 15.09px;
+
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    font-weight: 200;
+    font-size: 14.0865px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+
+    color: #FFFFFF;
+}
+
+.card-number {
+    /* Card Number */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.51544px;
+
+    position: absolute;
+    left: 6.54%;
+    right: 6.66%;
+    top: 54.35%;
+    bottom: 30.09%;
+}
+
+.card-number-amex {
+    justify-content: space-around;
+}
+
+.card-number-part {
+    height: 34.79px;
+    
+    font-weight: 400;
+    font-size: 28.1729px;
+    line-height: 37px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    
+    color: #FFFFFF;
+}
+
+.card-wifi {
+    /* vuesax/linear/wifi */
+
+    width: 47.41px;
+    height: 47.41px;
+    
+    position: absolute;
+    right: 3%;
+    top: 30%;
+
+}
+
+.card-chip {
+    position: absolute;
+    left: 8%;
+    top: 30%;
+}
+
+.card-vendor {
+    width: max-content;
+    height: max-content;
+
+    position: absolute;
+    right: 5%;
+    bottom: 4%;
+}
+
+.vendor-amex, .vendor-discover {
+    width: 80px;
+    height: 50px;
+}
+
+.vendor-mastercard {
+    width: 100px;
+    position: relative;
+    transform: translate(10%, 15%);
+}
+
+.vendor-visa {
+    width: 100px;
+    position: relative;
+    transform: translate(0%, -5%);
+}
+
+.card-bank {
+    position: absolute;
+    right: 5%;
+    top: 4%;
+}
+
+.bank-citi {
+    width: 120px;
+}
+.bank-icici {
+    width: 150px;
+}
+
+.bank-boa {
+    width: 200px;
+    transform: translate(2%, -42%);
+}
+
+.bank-hdfc {
+    width: 150px;
+    transform: translate(0%, 40%);
+}
+
+.bank-sbi {
+    width: 85px;
+    transform: translate(0%, 30%);
+}

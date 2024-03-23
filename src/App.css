@@ -37,14 +37,24 @@
     /* Body */
     
     /* Auto layout */
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
     padding: 0px;
     gap: 10px;
+    padding: absolute;
+    overflow-x: hidden;
+    overflow-y: scroll;
     
     width: 100%;
     height: 100%;
+
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+.Body::-webkit-scrollbar {
+    display: none;
 }
 
 a {
