@@ -53,6 +53,7 @@ function BillingForm({billingCompleted}) {
     };
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         billingCompleted(true);
     };
 
