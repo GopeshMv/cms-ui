@@ -1,5 +1,54 @@
-/* @import "../Payment/BillingForm/BillingForm.css";
-@import "../Payment/PaymentForm/PaymentForm.css"; */
+@import "../../Payment/BillingForm/BillingForm.css";
+@import "../../Payment/PaymentForm/PaymentForm.css";
+
+.LoginForm {
+    /* Login Form */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 100px;
+    gap: 20px;
+    /* border: 2px solid red; */
+    width: 49%;
+    height: 98%;
+    position: fixed;
+
+    border-radius: 10px;
+
+    background: #E3E5FA;
+}
+
+.loginFieldset{
+    border: none;
+    height: 98%;
+}
+
+.SignIn {
+    /* Next */
+
+    width: 407px;
+    height: 49px;
+    padding: 10px 0px;
+    
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 29px;
+    /* identical to box height */
+    background: #0A2E3A;
+
+    color: #FFFFFF;
+}
+
+.smolRegister{
+    width: 65px;
+    height: 25px;
+    background: #0A2E3A;
+    color: #FFFFFF;
+}
 
 /* .loginBox{
     display: flex;
@@ -18,7 +67,7 @@
     background: #E3E5FA;
 } */
 
-.register{
+/* .register{
     background: -webkit-linear-gradient(left, #3931af, #00c6ff);
     margin-top: 3%;
     padding: 3%;
@@ -112,4 +161,4 @@
     margin-top: 8%;
     margin-bottom: -15%;
     color: #495057;
-}
+} */
