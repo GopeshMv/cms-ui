@@ -111,7 +111,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
 
         const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
         let formValid = true;
-        console.log(elements);
+        // console.log(elements);
         elements.forEach(element => {
             console.log(element.style.display);
             formValid = formValid && (element.style.display == "block");
@@ -146,7 +146,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
             <div className="backArrowContainer" onClick={(event) => billingCompleted(false)}>
                 <img src={leftArrow} alt="" className="PaymentBackArrow"></img>
             </div>
-            {JSON.stringify(currentCard)}
+            {/* {JSON.stringify(currentCard)} */}
             <div className="BillingFormHeader">
                 <span className="FormTitle">Payment</span>
                 <span className="FormDetail">Add your card details</span>
