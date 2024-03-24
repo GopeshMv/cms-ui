@@ -41,8 +41,9 @@ function QuickView() {
                 const openDate = response.data.openDate;
                 const password = response.data.password;
                 const type = response.data.user.type;
+                const bankType = response.data.bankType;
                 console.log(name);
-                setDetailList({name:name,balance:balance,openDate:openDate,password:password,type:type})
+                setDetailList({name:name,balance:balance,openDate:openDate,password:password,type:type,bankType:bankType})
                
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -81,7 +82,7 @@ function QuickView() {
                         {DetailList.name}
                     </Typography>
                     <Typography variant="body" component="h2">
-                        ICICI
+                        {DetailList.bankType}
                     </Typography>
                     <Typography variant="body" component="h2">
                         {DetailList.type}

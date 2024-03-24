@@ -23,7 +23,13 @@ function AccountBalance() {
                 const password = response.data.password;
                 const type = response.data.user.type;
                 console.log(name);
-                setDetailList({name:name,balance:balance,openDate:openDate,password:password,type:type})
+
+                const response2 = await axios.get(`http://localhost:8090/account/LastDate/1`);
+                console.log('Response:', response2); // Log the full response
+                const amount=response2.data.amount;
+                const date=response2.data.date;
+
+                setDetailList({name:name,balance:balance,openDate:openDate,password:password,type:type,amount:amount,date:date});
                
             } catch (error) {
                 console.error('Error fetching data: ', error);
@@ -46,10 +52,10 @@ function AccountBalance() {
                         Last Payment:
                     </Typography>
                     <Typography variant="body1" component="h1" sx={{margin:2, marginLeft:10,fontSize:"20px"}}>
-                    <CurrencyRupeeIcon sx={{fontSize:"17px"}}/>1000.00
+                    <CurrencyRupeeIcon sx={{fontSize:"17px"}}/>{DetailList.amount}
                     </Typography>
                     <Typography variant="body1" component="h1" sx={{marginLeft:20,fontSize:"20px"}}>
-                        On Feb 25,2024
+                        On {DetailList.date}
                     </Typography>
                 </CardContent>
             </Card>
