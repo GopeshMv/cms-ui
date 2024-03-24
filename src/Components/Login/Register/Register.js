@@ -14,17 +14,17 @@ function Register({ handleLoginToggle, isRegisterActive }) {
                     <div className="CardSlideshow"></div>
                     <div className="CardDetails">
                         <label for="email" className="BillingLabel">Email ID</label>
-                        <input name="email" className="BillingTextBox"></input>
+                        <input name="email" className="BillingTextBox" type="email"required></input>
                         <label for="name" classph noName="BillingLabel">Name</label>
-                        <input name="name" className="BillingTextBox"></input>
+                        <input name="name" className="BillingTextBox" required></input>
                         <label for="phone no" className="BillingLabel">Ph No</label>
-                        <input name="phone no" className="BillingTextBox"></input>
+                        <input name="phone no" className="BillingTextBox" required></input>
                         <label for="address" className="BillingLabel">Address</label>
-                        <input name="address" className="BillingTextBox"></input>
+                        <input name="address" className="BillingTextBox" required></input>
                         <label for="password" className="BillingLabel">Password</label>
-                        <input name="password" className="BillingTextBox"></input>
+                        <input name="password" className="BillingTextBox" type="password" required></input>
                         <label for="confirm password" className="BillingLabel">Confirm Password</label>
-                        <input name="confirm password" className="BillingTextBox"></input>
+                        <input name="confirm password" className="BillingTextBox" type="password"required></input>
                         <p>Existing User? <button onClick={handleLoginToggle} className="smolLogin">Login</button></p>
                         <button onClick={handleLoginToggle} className="SignIn">Register</button>
 
