@@ -40,9 +40,10 @@
     /* display: flex;
     flex-direction: column;
     align-items: center; */
+    display: flex;
     padding: 0px;
     gap: 10px;
-    padding: absolute;
+    /* padding: absolute; */
     overflow-x: hidden;
     overflow-y: scroll;
     
