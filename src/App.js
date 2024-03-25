@@ -4,8 +4,8 @@ import SideNav from './Components/SideNav/SideNav';
 import TopNav from './Components/TopNav/TopNav';
 import Home from './Components/Home/Home';
 import Payment from './Components/Payment/Payment';
-import Transactions from './Components/Transactions/Transactions';
 import Account from './Components/Account/Account';
+import TransactionTable from './Components/Transactions/TransactionTable';
 
 
 function App() {
@@ -21,15 +21,14 @@ function App() {
                             <Route index element={<Home />} />
                             <Route path="/account" element={<Account />} />
                             <Route path="/payment" element={<Payment />} />
-                            <Route path="/transactions" element={<Transactions />} />
+                            <Route path="/transactions" element={<TransactionTable />} />
                         </Routes>
                     </BrowserRouter>
                 </div>
             </div>
-            
-        </div>       
-        );
-    }
-    
-    export default App;
-    
+
+        </div>
+    );
+}
+
+export default App;

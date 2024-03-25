@@ -2,29 +2,28 @@ import React, { useState } from "react";
 import BillingForm from "./BillingForm/BillingForm";
 import PaymentForm from "./PaymentForm/PaymentForm";
 import PaymentStatus from "./PaymentStatus/PaymentStatus";
-import PaymentRequestForm from "./PaymentRequestForm/PaymentRequestForm";
+import PaymentQueue from "./PaymentQueue/PaymentQueue";
+import { ContextProvider } from "./ContextProvider";
 
 function Payment() {
     const [billingCompleted, setBillingCompleted] = useState(false);
     const [paymentCompleted, setPaymentCompleted] = useState(false);
-    const [requestCompleted, setRequestCompleted] = useState(false);
-
-    let user = "customer" ; // customer or merchant
+    const [amount, setAmount] = useState(null);
+    const [merchant, setMerchant] = useState(null);
 
     return (
         <>
-            { user == "customer" ?
-                ( !paymentCompleted ?
+            <ContextProvider>
+                {!paymentCompleted ?
                     (
                         !billingCompleted ?
-                        <BillingForm billingCompleted={setBillingCompleted}/> :
-                        <PaymentForm billingCompleted={setBillingCompleted} paymentCompleted={setPaymentCompleted}/> 
+                            <BillingForm billingCompleted={setBillingCompleted} /> :
+                            <PaymentForm billingCompleted={setBillingCompleted} paymentCompleted={setPaymentCompleted} amount={amount} merchant={merchant} />
                     ) :
                     <PaymentStatus />
-                ) :
-                <PaymentRequestForm requestCompleted={setRequestCompleted} />
-    
-            }
+                }
+                <PaymentQueue setAmount={setAmount} setMerchant={setMerchant} />
+            </ContextProvider>
         </>
     );
 }

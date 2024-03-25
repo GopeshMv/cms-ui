@@ -1,23 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./PaymentForm.css";
 import CreditCardSlideshow from "../../Card/CreditCardSlideshow/CreditCardSlideshow";
 import CreditCard from "../../Card/CreditCard/CreditCard";
 import leftArrow from "../../../utils/svg/left_arrow.svg";
 import verifiedIcon from "../../../utils/svg/verified.svg";
+import './PinDialog.js';
+import PinDialog from "./PinDialog.js";
+import { useMyContext } from "../ContextProvider.js";
 
-function PaymentForm({ billingCompleted, paymentCompleted }) {
+function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
     const [currentCard, setCurrentCard] = useState({});
     const [formattedCardholder, setformattedCardholder] = useState("");
     const [formattedExpiry, setformattedExpiry] = useState("");
     const [formattedCardnumber, setformattedCardnumber] = useState("");
     const [formattedCvv, setformattedCvv] = useState("");
+    const [open, setOpen] = useState(false);
+    const [inputValue, setInputValue] = useState(0);
+    const [creditCardData, setCreditCardData] = useState([]);
+    const { paymentId } = useMyContext();
 
+    const paymentRequestId = paymentId;
+
+    console.log(paymentId);
+
+    const handleOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=2`;
+            const response = await fetch(`${apiUrl}`);
+            const data = await response.json();
+            setCreditCardData(data);
+        };
+        fetchData();
+    }, []);
+
+    console.log(creditCardData);
+
+    const postPayment = async (inputPin) => {
+        try {
+            const requestBody = {
+                inputPin: inputPin,
+                paymentRequestId: paymentRequestId
+            };
+            const requestParam = 4182433449341033;
+
+            const response = await fetch(`http://localhost:8090/transaction/initiate?cardNumber=${requestParam}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody),
+            });
+            const data = await response.json();
+            console.log(data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    };
 
     const handleCardinputBlur = (event, expectedValue) => {
         let currentValue = event.target.value;
         let amex = /\d{4} \d{6} \d{5}/
         let notamex = /(\d{4} ){3}\d{4}/
-        if (amex.test(currentValue) || notamex.test(currentValue)){
+        if (amex.test(currentValue) || notamex.test(currentValue)) {
             currentValue = currentValue.replace(/\D/g, "");
         }
         // console.log(currentValue + "\n" + expectedValue);
@@ -50,7 +102,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
         let formattedVal = inputVal;
 
         formattedVal = formattedVal.replace(/\D/g, "");
-        if (currentCard.vendor == "AmEx"){
+        if (currentCard.vendor == "AmEx") {
             formattedVal = formattedVal.replace(/(\d{4})(\d{0,6})(\d{0,5})(\d)*/, "$1 $2 $3").trim();
         } else {
             formattedVal = formattedVal.replace(/(\d{4})(\d{0,4})(\d{0,4})(\d{0,4})(\d)*/, "$1 $2 $3 $4").trim();
@@ -65,7 +117,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
 
 
         if (
-            event.nativeEvent.inputType == "deleteContentBackward"  && 
+            event.nativeEvent.inputType == "deleteContentBackward" &&
             /^\d\d\/$/.test(formattedVal)
         ) {
             formattedVal = formattedVal.replace(/(\d\d)\//, "$1");
@@ -75,7 +127,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
         }
 
         if (
-            event.nativeEvent.inputType == "deleteContentBackward"  && 
+            event.nativeEvent.inputType == "deleteContentBackward" &&
             /^\d\d$/.test(formattedVal)
         ) {
             formattedVal = formattedVal.replace(/(\d)\d\//, "$1");
@@ -87,20 +139,20 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
         formattedVal = formattedVal.replace(/\D/g, "");
         formattedVal = formattedVal.replace(/^[2-9]/, "");
         formattedVal = formattedVal.replace(/^1[3-9]/, "1");
-        
+
 
         if (formattedVal.length >= 2) {
-            formattedVal = formattedVal.slice(0, 2) + "/" + formattedVal.slice(2,4);
+            formattedVal = formattedVal.slice(0, 2) + "/" + formattedVal.slice(2, 4);
         }
 
         setformattedExpiry(formattedVal);
-    };  
+    };
 
     const handleCvvChange = (event) => {
         const inputVal = event.target.value;
         let formattedVal = inputVal;
 
-        formattedVal = formattedVal.replace(/\D/g,"");
+        formattedVal = formattedVal.replace(/\D/g, "");
         formattedVal = formattedVal.replace(/^(\d{3}).*$/, "$1");
 
         setformattedCvv(formattedVal);
@@ -140,7 +192,7 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
             element.style.display = "none";
         });
     }, [currentCard]);
-    
+
     return (
         <form className="PaymentForm" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
             <div className="backArrowContainer" onClick={(event) => billingCompleted(false)}>
@@ -154,26 +206,9 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
             <div className="BillingBody">
                 <div className="CardChoice"></div>
                 <CreditCardSlideshow passCardToParent={setCurrentCard}>
-                    <CreditCard bank="boa" vendor="AmEx" cardnumber="438965210748592" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="boa" vendor="Discover" cardnumber="5164028369514708" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="boa" vendor="MasterCard" cardnumber="5189753024698135" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="boa" vendor="Visa" cardnumber="5146238097458362" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="citi" vendor="AmEx" cardnumber="456210948756321" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="citi" vendor="Discover" cardnumber="5142073985624703" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="citi" vendor="MasterCard" cardnumber="5801346928570139" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="citi" vendor="Visa" cardnumber="5236748190362475" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="hdfc" vendor="AmEx" cardnumber="467821059463207" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="hdfc" vendor="Discover" cardnumber="5213496078351264" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="hdfc" vendor="MasterCard" cardnumber="5548320194762308" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="hdfc" vendor="Visa" cardnumber="5581436927045362" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="icici" vendor="AmEx" cardnumber="487321059674302" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="icici" vendor="Discover" cardnumber="5553024768942130" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="icici" vendor="MasterCard" cardnumber="5932167401859372" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="icici" vendor="Visa" cardnumber="5210436978351426" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="sbi" vendor="AmEx" cardnumber="427819056304198" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="sbi" vendor="Discover" cardnumber="5391246087264315" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="sbi" vendor="MasterCard" cardnumber="5724130964873218" cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    <CreditCard bank="sbi" vendor="Visa" cardnumber="5341672980452361" cardholder="Jane Doe" validfrom="02/24" validthru="02/29" />
+                    { creditCardData.map(row => (
+                        <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder="John Doe" validfrom="02/24" validthru="02/29" />
+                    ))};
                 </CreditCardSlideshow>
                 <div className="CardDetails">
                     <label for="cardholder" className="BillingLabel">Cardholder's Name</label>
@@ -199,14 +234,24 @@ function PaymentForm({ billingCompleted, paymentCompleted }) {
                         </div>
                     </div>
 
-                    <button type="submit" className="BillingNextButton Paynow">
+                    <button onClick={handleOpen} type="submit" className="BillingNextButton Paynow">
                         <span className="BillingNext">Pay Now</span>
                     </button>
+                    <PinDialog open={open} onClose={handleClose} setInputValue={setInputValue} postPayment={postPayment} />
 
+                    {amount && merchant ?
+                        <div style={{ paddingTop: '5vh' }}>
+                            <span><p>Paying to {merchant} the amount: {amount} </p></span>
+                        </div> : <div style={{ paddingTop: '5vh' }}>
+                            <span><p>Select the respective payment request!</p></span>
+                        </div>
+                    }
                 </div>
             </div>
+
         </form>
     );
 }
 
 export default PaymentForm;
+

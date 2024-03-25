@@ -7,10 +7,13 @@ function CreditCardSlideshow({ children, passCardToParent }) {
     const scrollableDivRef = useRef(null);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [currentCard, setCurrentCard] = useState(children[0].props);
+    console.log(currentCard);
+    useEffect(() => {
+        console.log(currentCard);
+    }, [currentCard]);
     var totalCards = 0;
 
     children.map(child => totalCards++);
-
 
     const scrollToCard = (direction) => {
         console.log(direction);
@@ -18,21 +21,21 @@ function CreditCardSlideshow({ children, passCardToParent }) {
         if (direction == "left") {
             scrollableDivRef.current.scrollLeft = Math.ceil(scrollableDivRef.current.scrollLeft - cardViewportWidth);
             if (currentCardIndex != 0) {
-                setCurrentCardIndex(currentCardIndex-1);
+                setCurrentCardIndex(currentCardIndex - 1);
             }
         } else if (direction == "right") {
             scrollableDivRef.current.scrollLeft = Math.ceil(scrollableDivRef.current.scrollLeft + cardViewportWidth);
-            if (currentCardIndex != totalCards-1) {
-                setCurrentCardIndex(currentCardIndex+1);
+            if (currentCardIndex != totalCards - 1) {
+                setCurrentCardIndex(currentCardIndex + 1);
             }
-        }        
+        }
     };
 
     useEffect(() => {
-        setCurrentCard(children[currentCardIndex].props);
-        passCardToParent(currentCard);
-    }, [currentCardIndex]);
-
+        const newCard = children[currentCardIndex].props;
+        setCurrentCard(newCard);
+        passCardToParent(newCard); // Pass the new value directly
+    }, [currentCardIndex, children]);
 
     return (
         <div className="card-slideshow" onLoad={passCardToParent(currentCard)}>
