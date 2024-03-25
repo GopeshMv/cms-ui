@@ -1,5 +1,9 @@
 @import "../../Payment/BillingForm/BillingForm.css";
 @import "../../Payment/PaymentForm/PaymentForm.css";
+select {
+    vertical-align:middle; 
+  }
+
 
 .RegisterForm {
     /* Login Form */
@@ -21,6 +25,11 @@
     background: #E3E5FA;
 }
 
+.error-message {
+    color: red;
+    font-size: 8px;
+  }
+  
 .smolLogin{
     width: 50px;
     height: 25px;
