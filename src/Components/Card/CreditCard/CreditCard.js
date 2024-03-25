@@ -69,7 +69,7 @@ function CardNumber({ vendor, cardnumber }) {
     }
 }
 
-function CreditCard({ cardnumber, validfrom, validthru, cardholder, bank, vendor }) {
+function CreditCard({ cardnumber, validfrom, validthru, cardholder, bank, vendor, status }) {
     return (
         <div className="custom-card">
             <div className="card-bank">
