@@ -12,8 +12,8 @@ import { useState } from 'react';
 
 
 function App() {
-    const [isLoginActive,setIsLoginActive]=useState(true)
-    const [isRegisterActive,setIsRegisterActive]=useState(false)
+    const [isLoginActive, setIsLoginActive] = useState(true)
+    const [isRegisterActive, setIsRegisterActive] = useState(false)
 
     const handleLoginToggle = (e) =>{
         e.preventDefault();
