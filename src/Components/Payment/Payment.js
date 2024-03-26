@@ -21,7 +21,7 @@ function Payment() {
                             <PaymentForm billingCompleted={setBillingCompleted} paymentCompleted={setPaymentCompleted} amount={amount} merchant={merchant} />
                     ) :
                     <PaymentStatus />
-                }
+                } 
                 <PaymentQueue setAmount={setAmount} setMerchant={setMerchant} />
             </ContextProvider>
         </>
