@@ -122,7 +122,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
 
     }
     return (
-        <form onSubmit={(formData.password === formData.confirmPassword) && handleCombinedSubmit} className="RegisterForm">
+        <form onSubmit={handleCombinedSubmit} className="RegisterForm">
             <fieldset disabled={!isRegisterActive} className="registerFieldset" >
                 <div className="BillingFormHeader">
                     <span className="FormTitle">Registration</span>
@@ -176,7 +176,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
                         <div className="error-message">{errors.confirmPassword && <div><span>{errors.confirmPassword}</span><br /></div>} </div>
 
                         <p>Existing User? <button onClick={handleLoginToggle} className="smolLogin">Login</button></p>
-                        <button type="submit" className="SignIn" disabled={formData.password !== formData.confirmPassword}>
+                        <button type="submit" className="SignIn">
                             Register
                         </button>
                         {/* <button type="submit" className="SignIn">Register</button> */}
