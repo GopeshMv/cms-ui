@@ -8,6 +8,15 @@ import './PinDialog.js';
 import PinDialog from "./PinDialog.js";
 import { useMyContext } from "../ContextProvider.js";
 
+const formatDate = (dateString, minusYears = 0) => {
+    const date = new Date(dateString);
+    date.setFullYear(date.getFullYear() - minusYears);
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear().toString().slice(-2);
+
+    return `${String(month).padStart(2, "0")}/${year}`;
+};
+
 function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
     const [currentCard, setCurrentCard] = useState({});
     const [formattedCardholder, setformattedCardholder] = useState("");
@@ -23,7 +32,8 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     //console.log(paymentId);
     // console.log(currentCard);   
-    useEffect(() => {}, [currentCard]);
+    // useEffect(() => {}, [currentCard]);
+
 
     const handleOpen = () => {
         const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
@@ -44,7 +54,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=${localStorage.id}`;
+            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=${localStorage.getItem("id")}`;
             const response = await fetch(`${apiUrl}`);
             const data = await response.json();
             setCreditCardData(data);
@@ -209,7 +219,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
                 <CreditCardSlideshow passCardToParent={setCurrentCard}>
                     { creditCardData.map(row => {
                         if (row.activationStatus == "ACTIVATED") {
-                            return <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder="John Doe" validfrom="02/24" validthru="02/29" />;
+                            return <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder={localStorage.getItem("name")} validfrom={formatDate(row.expireDate, 5)} validthru={formatDate(row.expireDate)} />;
                         }
                         return;
                     })}

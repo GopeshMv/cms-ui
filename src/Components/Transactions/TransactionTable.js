@@ -45,11 +45,12 @@ function TransactionTable() {
     useEffect(() => {
         const fetchdata = async () => {
             const apiUrl = `http://localhost:8090/transaction/all`;
-            const apiParams = '2';
+            const apiParams = localStorage.getItem("id");
             const response = await fetch(`${apiUrl}`);
             const responseData = await response.json();
             console.log(responseData);
-            setData(responseData);
+            if (response.ok)
+                setData(responseData);
         };
         fetchdata();
     }, []);

@@ -39,22 +39,26 @@ function App() {
                             } /> 
                         </Routes>
                     </BrowserRouter> :
-                    <>
-                        <SideNav />
-                        <div className="Main">
-                            <TopNav />
-                            <div className="Body">
-                                <BrowserRouter>
-                                    <Routes>
-                                        <Route path="/home" element={<Home />} />
-                                        <Route path="/account" element={<Account />} />
-                                        <Route path="/payment" element={<Payment />} />
-                                        <Route path="/transactions" element={<TransactionTable />} />
-                                    </Routes>
-                                </BrowserRouter>
+                    ( localStorage.getItem("type") == "Customer" ? 
+                        <>
+                            <SideNav />
+                            <div className="Main">
+                                <TopNav />
+                                <div className="Body">
+                                    <BrowserRouter>
+                                        <Routes>
+                                            <Route path="/home" element={<Home />} />
+                                            <Route path="/account" element={<Account />} />
+                                            <Route path="/payment" element={<Payment />} />
+                                            <Route path="/transactions" element={<TransactionTable />} />
+                                        </Routes>
+                                    </BrowserRouter>
+                                </div>
                             </div>
-                        </div>
-                    </>
+                        </> :
+                        <>
+                        </>
+                    )
                 } 
         </div >
         

@@ -41,7 +41,7 @@ function PaymentQueue({ setAmount, setMerchant }) {
     useEffect(() => {
         const fetchData = async () => {
             const apiUrl = `http://localhost:8090/user/paymentRequests?userId`;
-            const apiParams = localStorage.id;
+            const apiParams = localStorage.getItem("id");
             const response = await fetch(`${apiUrl}=${apiParams}`);
             const responseData = await response.json();
             if (response.ok) {
@@ -80,7 +80,7 @@ function PaymentQueue({ setAmount, setMerchant }) {
                 </TableHead>
                 <TableBody>
                     {data.map((row) => {
-                        
+                        if (row.status != "PENDING") return;
                         return  <StyledTableRow key={row.paymentRequestId}>
                                     <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
                                     <StyledTableCell component="th" scope="row">
