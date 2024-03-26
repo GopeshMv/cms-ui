@@ -41,10 +41,12 @@ function PaymentQueue({ setAmount, setMerchant }) {
     useEffect(() => {
         const fetchData = async () => {
             const apiUrl = `http://localhost:8090/user/paymentRequests?userId`;
-            const apiParams = '2';
+            const apiParams = '1';
             const response = await fetch(`${apiUrl}=${apiParams}`);
             const responseData = await response.json();
-            setData(responseData);
+            if (response.ok) {
+                setData(responseData);
+            }
         }
         fetchData();
     }, []);
@@ -75,7 +77,9 @@ function PaymentQueue({ setAmount, setMerchant }) {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {data.map((row) => (
+                    {data.map((row) => {
+                        if (row.status != "PENDING") return;
+                        
                         <StyledTableRow key={row.paymentRequestId}>
                             <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
                             <StyledTableCell component="th" scope="row">
@@ -85,7 +89,7 @@ function PaymentQueue({ setAmount, setMerchant }) {
                             <StyledTableCell align="left">{row.topic}</StyledTableCell>
                             <StyledTableCell align="left">{row.requestAmount}</StyledTableCell>
                         </StyledTableRow>
-                    ))}
+                    })}
                 </TableBody>
             </Table>
         </TableContainer>

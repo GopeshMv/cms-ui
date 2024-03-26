@@ -6,17 +6,19 @@ import RightSquareArrow from "../../../utils/svg/right_square_arrow.svg";
 function CreditCardSlideshow({ children, passCardToParent }) {
     const scrollableDivRef = useRef(null);
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
-    const [currentCard, setCurrentCard] = useState(children[0].props);
-    console.log(currentCard);
+    const [currentCard, setCurrentCard] = useState(children[0]?.props);
+    
     useEffect(() => {
+        setCurrentCard(children[currentCardIndex]?.props);
         console.log(currentCard);
-    }, [currentCard]);
+    }, [children]);
+
+    
     var totalCards = 0;
 
     children.map(child => totalCards++);
 
     const scrollToCard = (direction) => {
-        console.log(direction);
         const cardViewportWidth = 426;
         if (direction == "left") {
             scrollableDivRef.current.scrollLeft = Math.ceil(scrollableDivRef.current.scrollLeft - cardViewportWidth);
@@ -31,11 +33,6 @@ function CreditCardSlideshow({ children, passCardToParent }) {
         }
     };
 
-    useEffect(() => {
-        const newCard = children[currentCardIndex].props;
-        setCurrentCard(newCard);
-        passCardToParent(newCard); // Pass the new value directly
-    }, [currentCardIndex, children]);
 
     return (
         <div className="card-slideshow" onLoad={passCardToParent(currentCard)}>
