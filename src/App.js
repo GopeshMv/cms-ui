@@ -7,6 +7,7 @@ import Payment from './Components/Payment/Payment';
 import Account from './Components/Account/Account';
 import Login from './Components/Login/SignIn/Login.js';
 import Register from './Components/Login/Register/Register.js';
+import Admin from './Components/Admin/Admin.js'
 import { useState } from 'react';
 import TransactionTable from './Components/Transactions/TransactionTable';
 import Merchant from './Components/Merchant/Merchant.js';
