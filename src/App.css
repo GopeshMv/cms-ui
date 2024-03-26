@@ -22,12 +22,12 @@
     /* Auto layout */
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    /* justify-content: center; */
     align-items: center;
     padding: 5px;
     gap: 5px;
     
-    position:fixed;
+    position:fixed; 
     height:100%;
     width:100%;
     
@@ -62,7 +62,7 @@
     padding: 0px;
     gap: 10px;
     /* padding: absolute; */
-    overflow-x: hidden;
+    /* overflow-x: hidden; */
     overflow-y: scroll;
     
     width: 100%;

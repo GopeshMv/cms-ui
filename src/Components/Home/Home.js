@@ -25,11 +25,12 @@ function Home() {
                         <InfoCard>
                             <CreditCard bank="sbi" vendor="MasterCard" cardnumber="5724130964873218" cardholder="John Doe" validfrom="02/24" validthru="02/29" status="REQUESTED" />
                         </InfoCard>
-                    </div>
-                    <div className="plus-card">
-                        <img src={Plus} />
+                        <InfoCard>
+                            <CreditCard bank="sbi" vendor="MasterCard" cardnumber="5724130964873218" cardholder="John Doe" validfrom="02/24" validthru="02/29" status="REQUESTED" />
+                        </InfoCard>
                     </div>
                 </div>
+                
             </div>
 
             

@@ -9,6 +9,8 @@
     width: 350px;
     min-width: 350px;
     height: 100%;
+    position: relative;
+    left: 0;
     
 
     background: #CCCDFA;
