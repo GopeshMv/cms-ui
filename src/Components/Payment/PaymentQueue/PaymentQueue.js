@@ -80,18 +80,16 @@ function PaymentQueue({ setAmount, setMerchant }) {
                 </TableHead>
                 <TableBody>
                     {data.map((row) => {
-                        // if (row.status != "PENDING") return;
-                        console.log(row);
                         
-                        <StyledTableRow key={row.paymentRequestId}>
-                            <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
-                            <StyledTableCell component="th" scope="row">
-                                {row.merchantName}
-                            </StyledTableCell>
-                            <StyledTableCell align="left">{row.paymentRequestDate}</StyledTableCell>
-                            <StyledTableCell align="left">{row.topic}</StyledTableCell>
-                            <StyledTableCell align="left">{row.requestAmount}</StyledTableCell>
-                        </StyledTableRow>
+                        return  <StyledTableRow key={row.paymentRequestId}>
+                                    <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.merchantName}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">{row.paymentRequestDate}</StyledTableCell>
+                                    <StyledTableCell align="left">{row.topic}</StyledTableCell>
+                                    <StyledTableCell align="left">{row.requestAmount}</StyledTableCell>
+                                </StyledTableRow>
                     })}
                 </TableBody>
             </Table>

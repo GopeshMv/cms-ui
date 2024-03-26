@@ -11,7 +11,7 @@ function CreditCardSlideshow({ children, passCardToParent }) {
     useEffect(() => {
         setCurrentCard(children[currentCardIndex]?.props);
         // console.log(currentCard);
-    }, [currentCardIndex]);
+    }, [children]);
 
     
     var totalCards = 0;
