@@ -9,6 +9,7 @@ import Login from './Components/Login/SignIn/Login.js';
 import Register from './Components/Login/Register/Register.js';
 import { useState } from 'react';
 import TransactionTable from './Components/Transactions/TransactionTable';
+import Merchant from './Components/Merchant/Merchant.js';
 
 
 function App() {
@@ -57,6 +58,7 @@ function App() {
                             </div>
                         </> :
                         <>
+                            <Merchant />
                         </>
                     )
                 } 
