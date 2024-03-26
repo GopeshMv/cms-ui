@@ -7,6 +7,7 @@ import Payment from './Components/Payment/Payment';
 import Account from './Components/Account/Account';
 import Login from './Components/Login/SignIn/Login.js';
 import Register from './Components/Login/Register/Register.js';
+import Admin from './Components/Admin/Admin.js'
 import { useState } from 'react';
 import TransactionTable from './Components/Transactions/TransactionTable';
 
@@ -39,7 +40,7 @@ function App() {
             </div> */}
             <BrowserRouter>
                 <Routes>
-                    <Route path="/" element={
+                    {/* <Route path="/" element={
                         <div className="container">
                             <div className="Login">
                                 <Login handleLoginToggle={handleLoginToggle} isLoginActive={isLoginActive} />
@@ -48,7 +49,8 @@ function App() {
                                 <Register handleLoginToggle={handleLoginToggle} isRegisterActive={isRegisterActive} />
                             </div>
                         </div>
-                    } />
+                    } /> */}
+                    <Route path='/' element={<Admin/>}/>
                 </Routes>
             </BrowserRouter>
         </div >

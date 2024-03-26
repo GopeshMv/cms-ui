@@ -9,12 +9,13 @@ function Login({ handleLoginToggle, isLoginActive }) {
     const [data, setData] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
 
         const fetchData = async () => {
-            const apiUrl = `http://localhost:8090/user/Login`;
+            const apiUrl = (alignment === 'user') ? `http://localhost:8090/user/Login` : `http://localhost:8090/adminLogin`;
 
             const params = new URLSearchParams({
                 email: email,
@@ -24,19 +25,21 @@ function Login({ handleLoginToggle, isLoginActive }) {
                 const response = await fetch(`${apiUrl}?${params}`, {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, password }),   
-                  });
-                  if(response){
+                    body: JSON.stringify({ email, password }),
+                });
+                if (response) {
                     console.log(response);
-                  }
-                  const data = await response.text();
-                  if (response.ok && data === "Login Successful") {
-                      console.log("Logging successful");
-                  } else{ 
-                      console.log("Enter valid email and password!");
-                  }
+                }
+                const data = await response.text();
+                if (response.ok && data === "Login Successful") {
+                    console.log("Logging successful");
+                    setIsLogin(true);
+                } else {
+                    console.log("Enter valid Email and Password!");
+                    alert("Enter valid email and password")
+                }
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
@@ -59,9 +62,9 @@ function Login({ handleLoginToggle, isLoginActive }) {
         setAlignment(newAlignment);
     };
 
-    
+
     const handleChange = (e) => {
-        console.log(email,password);
+        console.log(email, password);
         const { name, value } = e.target;
         setFormData({
             ...formData, [name]: value
@@ -81,15 +84,12 @@ function Login({ handleLoginToggle, isLoginActive }) {
 
         if (!formData.password.trim()) {
             validationErrors.password = "Password is required!";
-        } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$/.test(formData.password)) {
-            validationErrors.password = "Password format is invalid!";
-            console.log("Enter password satisfying the conditions");
         }
 
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length === 0) {
-            console.log("Format is fine");
+            console.log("Format is fine, check the value");
             ;
         }
     }
@@ -127,11 +127,11 @@ function Login({ handleLoginToggle, isLoginActive }) {
                     <div className="CardDetails">
                         <label for="email" className="BillingLabel">Email ID</label>
                         <input name="email" className="BillingTextBox" onChange={(e) => { handleChange(e); setEmail(e.target.value); }}></input>
-                        <div className="error-message">{errors.email && <div><span>{errors.email}</span><br/><br/></div>} </div>
+                        <div className="error-message">{errors.email && <div><span>{errors.email}</span><br /><br/></div>} </div>
 
                         <label for="password" className="BillingLabel">Password</label>
                         <input name="password" className="BillingTextBox" type="password" onChange={(e) => { handleChange(e); setPassword(e.target.value); }}></input>
-                        <div className="error-message">{errors.password && <div><span>{errors.password}</span><br/><br/></div>} </div>
+                        <div className="error-message">{errors.password && <div><span>{errors.password}</span><br/><br /></div>} </div>
 
                         <p>Not an Existing User? <button onClick={handleLoginToggle} className="smolRegister">Register</button></p>
                         <button type="submit" className="SignIn">Sign In</button>
