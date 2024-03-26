@@ -49,6 +49,7 @@ function App() {
                                 <div className="Body">
                                     <BrowserRouter>
                                         <Routes>
+                                            <Route path="/" element={<Home />} />
                                             <Route path="/home" element={<Home />} />
                                             <Route path="/account" element={<Account />} />
                                             <Route path="/payment" element={<Payment />} />

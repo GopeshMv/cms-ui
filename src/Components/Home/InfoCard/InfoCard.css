@@ -1,0 +1,120 @@
+.info-card {
+    /* Card */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 5px 0px;
+
+    width: 340px;
+    user-select: none;
+}
+.info-card .custom-card {
+    transform: scale(80%);
+    margin-top: -40px;
+    margin-bottom: -10px;
+}
+
+.card-ops {
+    /* Card Ops */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 5px;
+    gap: 10px;
+
+}
+
+.credit-balance-section {
+    /* Credit Balance */
+
+    box-sizing: border-box;
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+
+    background: #DFE0FF;
+    border: 1px solid #080930;
+    border-radius: 10px;
+
+
+}
+
+.credit-balance-container {
+    /* Balance */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px;
+
+    height: 42px;
+
+}
+
+.credit-balance {
+    font-size: 24px;
+}
+
+.credit-balance-footer {
+    /* Footer */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    gap: 20px;
+
+    height: 34.91px;
+}
+
+.credit-balance-footer-title {
+    font-size: 14px;
+}
+
+.credit-balance-pay {
+    /* Pay button */
+
+    /* Auto layout */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 0px 10px;
+    gap: 10px;
+
+    width: 68px;
+    height: 34.91px;
+
+    background: #FFFFFF;
+    border-radius: 5px;
+
+    cursor: pointer;    
+
+}
+
+.credit-balance-pay:hover {
+    border: 2px black solid;
+}
+
+.action-section {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.action-section img {
+    cursor: pointer;
+}

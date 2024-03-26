@@ -69,7 +69,7 @@ function CardNumber({ vendor, cardnumber }) {
     }
 }
 
-function CreditCard({ cardnumber, validfrom, validthru, cardholder, bank, vendor }) {
+function CreditCard({ cardnumber, validfrom, validthru, cardholder, bank, vendor, status, cvv, showCvv = false }) {
     return (
         <div className="custom-card">
             <div className="card-bank">
@@ -99,6 +99,7 @@ function CreditCard({ cardnumber, validfrom, validthru, cardholder, bank, vendor
                     </div>
                 </div>
                 <span className="card-holder">{cardholder}</span>
+                { showCvv && <span className="card-cvv">{cvv}</span>}
             </div>
         </div>
         );
