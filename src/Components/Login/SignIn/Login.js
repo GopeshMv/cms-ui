@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Route } from 'react-router-dom';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import "./Login.css";
@@ -26,14 +27,19 @@ function Login({ handleLoginToggle, isLoginActive }) {
                     headers: {
                       'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({ email, password }),   
+                    body: JSON.stringify({ email, password }),  
                   });
                   if(response){
                     console.log(response);
                   }
-                  const data = await response.text();
-                  if (response.ok && data === "Login Successful") {
+                  var data = await response.text();
+                  if (response.ok && data.includes("Login Successful")) {
                       console.log("Logging successful");
+                      data = data.replace(/Login Successful\n/g, "");
+                      console.log(data)
+                      localStorage.setItem("id", data.split(",")[0]);
+                      localStorage.setItem("type", data.split(",")[1]);
+                      window.location.href = "/";
                   } else{ 
                       console.log("Enter valid email and password!");
                   }
