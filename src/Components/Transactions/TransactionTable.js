@@ -41,71 +41,79 @@ function TransactionTable() {
     const [open, setOpen] = useState(false);
     const [processedInvoiceData, setProcessedInvoiceData] = useState(null);
 
+    useEffect(() => {
+        if (processedInvoiceData) {
+            generatePDF();
+        }
+    }, [processedInvoiceData]);
 
     useEffect(() => {
         const fetchdata = async () => {
-            const apiUrl = `http://localhost:8090/transaction/all`;
-            const apiParams = '2';
-            const response = await fetch(`${apiUrl}`);
+            const apiUrl = `http://localhost:8090/transaction/user/all`;
+            const apiParams = localStorage.getItem("id");
+            const response = await fetch(`${apiUrl}?userId=${apiParams}`);
             const responseData = await response.json();
             console.log(responseData);
-            setData(responseData);
+            if (response.ok)
+                setData(responseData);
         };
         fetchdata();
     }, []);
 
-    useEffect(() => {
-        const fetchInvoice = async () => {
-            const apiUrl = `http://localhost:8090/user/customer/requestInvoice`;
-            const payload = {
-                transactionID: '1',
-                paymentRequestID: '1'
-            };
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-            const responseData = await response.json();
-            const result = xml2js.xml2js(responseData.invoiceBody, { compact: true, spaces: 4 });
-            setInvoiceData(result.invoice);
-
-            if (result.invoice) {
-                const invoiceDataResult = {
-                    customerName: result.invoice.customer.name._text,
-                    customerAddress: result.invoice.customer.address._text,
-                    transactionAmount: result.invoice.transaction.amount._text,
-                    transactionDate: result.invoice.transaction.date._text,
-                    transactionMerchant: result.invoice.transaction.merchant._text,
-                };
-                setProcessedInvoiceData(invoiceDataResult);
-            }
+    const fetchInvoice = async (transId) => {
+        const apiUrl = `http://localhost:8090/user/customer/requestInvoice`;
+        const payload = {
+            transactionID: transId,
         };
-        fetchInvoice();
-    }, []);
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json',
+            },
+            body: JSON.stringify(payload),
+        });
+        const responseData = await response.json();
+        const result = xml2js.xml2js(responseData.invoiceBody, { compact: true, spaces: 4 });
+        setInvoiceData(result.invoice);
+
+        if (result.invoice) {
+            const invoiceDataResult = {
+                customerName: result.invoice.customer.name._text,
+                customerAddress: result.invoice.customer.address._text,
+                transactionAmount: result.invoice.transaction.amount._text,
+                transactionDate: result.invoice.transaction.date._text,
+                transactionMerchant: result.invoice.transaction.merchant._text,
+            };
+            setProcessedInvoiceData(invoiceDataResult);
+        }
+    };
+
 
     function generatePDF() {
         // Create a new jsPDF instance
-        const doc = new jsPDF();
+        if (processedInvoiceData) {
+            const doc = new jsPDF();
 
-        // Set the document title
-        doc.setFontSize(20);
-        doc.text("Invoice", 20, 20);
+            // Set the document title
+            doc.setFontSize(20);
+            doc.text("Invoice", 20, 20);
 
-        // Reset the font size for the rest of the document
-        doc.setFontSize(12);
+            // Reset the font size for the rest of the document
+            doc.setFontSize(12);
 
-        // Add the invoice data
-        doc.text(`Customer Name: ${processedInvoiceData.customerName}`, 20, 40);
-        doc.text(`Address: ${processedInvoiceData.customerAddress}`, 20, 50);
-        doc.text(`Amount: ${processedInvoiceData.transactionAmount}`, 20, 60);
-        doc.text(`Date: ${processedInvoiceData.transactionDate}`, 20, 70);
-        doc.text(`Merchant: ${processedInvoiceData.transactionMerchant}`, 20, 80);
+            // Add the invoice data
+            doc.text(`Customer Name: ${processedInvoiceData.customerName}`, 20, 40);
+            doc.text(`Address: ${processedInvoiceData.customerAddress}`, 20, 50);
+            doc.text(`Amount: ${processedInvoiceData.transactionAmount}`, 20, 60);
+            doc.text(`Date: ${processedInvoiceData.transactionDate}`, 20, 70);
+            doc.text(`Merchant: ${processedInvoiceData.transactionMerchant}`, 20, 80);
 
-        // Save the PDF
-        doc.save("invoice.pdf");
+            // Save the PDF
+            doc.save("invoice.pdf");
+        } else {
+            console.log("WAITING");
+        }
+
     };
 
     const handleClickOpen = () => {
@@ -142,7 +150,7 @@ function TransactionTable() {
                                 <StyledTableCell align="left">{row.topic}</StyledTableCell>
                                 <StyledTableCell align="left">{row.amount}</StyledTableCell>
                                 <StyledTableCell align="left">
-                                    <Button onClick={generatePDF}>Generate Invoice</Button>
+                                    <Button onClick={async () => {fetchInvoice(row.transactionID)}}>Generate Invoice</Button>
                                 </StyledTableCell>
                             </StyledTableRow>
                         ))}

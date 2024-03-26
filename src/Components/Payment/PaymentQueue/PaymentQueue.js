@@ -41,7 +41,7 @@ function PaymentQueue({ setAmount, setMerchant }) {
     useEffect(() => {
         const fetchData = async () => {
             const apiUrl = `http://localhost:8090/user/paymentRequests?userId`;
-            const apiParams = '1';
+            const apiParams = localStorage.getItem("id");
             const response = await fetch(`${apiUrl}=${apiParams}`);
             const responseData = await response.json();
             if (response.ok) {
@@ -64,6 +64,8 @@ function PaymentQueue({ setAmount, setMerchant }) {
         }
     };
 
+    console.log(data);
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -79,16 +81,15 @@ function PaymentQueue({ setAmount, setMerchant }) {
                 <TableBody>
                     {data.map((row) => {
                         if (row.status != "PENDING") return;
-                        
-                        <StyledTableRow key={row.paymentRequestId}>
-                            <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
-                            <StyledTableCell component="th" scope="row">
-                                {row.merchantName}
-                            </StyledTableCell>
-                            <StyledTableCell align="left">{row.paymentRequestDate}</StyledTableCell>
-                            <StyledTableCell align="left">{row.topic}</StyledTableCell>
-                            <StyledTableCell align="left">{row.requestAmount}</StyledTableCell>
-                        </StyledTableRow>
+                        return  <StyledTableRow key={row.paymentRequestId}>
+                                    <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
+                                    <StyledTableCell component="th" scope="row">
+                                        {row.merchantName}
+                                    </StyledTableCell>
+                                    <StyledTableCell align="left">{row.paymentRequestDate}</StyledTableCell>
+                                    <StyledTableCell align="left">{row.topic}</StyledTableCell>
+                                    <StyledTableCell align="left">{row.requestAmount}</StyledTableCell>
+                                </StyledTableRow>
                     })}
                 </TableBody>
             </Table>
