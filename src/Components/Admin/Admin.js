@@ -124,35 +124,35 @@ function TransactionTable() {
 
     return (
         <>
-            <h3>Admin Page</h3>
-            <br></br>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table" >
-                    <TableHead>
-                        <TableRow>
-                            <StyledTableCell>Queue Number</StyledTableCell>
-                            <StyledTableCell align="left">Credit Card Number</StyledTableCell>
-                            <StyledTableCell>Approve <Button onClick={() => handleApproveAll()}>Approve All</Button></StyledTableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map((row) => (
-                            <StyledTableRow key={row.transactionID}>
-                                <StyledTableCell component="th" scope="row">
-                                    {row.queueNumber}
-                                </StyledTableCell>
-                                <StyledTableCell align="left">{row.creditCardNumber}</StyledTableCell>
-                                <StyledTableCell align="left">
-                                    <input type="checkbox" onChange={() => handleCheckboxChange(row)} />
-                                    {row.checked && <Button onClick={() => handleApprove(row)}>Approve</Button>
-                                    }
-                                </StyledTableCell>
-                            </StyledTableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-            </TableContainer>
-
+            <div >
+                    <h3 style={{ flex: '0 0 auto' }}>Admin Page</h3>
+                    <TableContainer component={Paper} className='table'>
+                        <Table sx={{ minWidth: 1440 }} aria-label="customized table" >
+                            <TableHead>
+                                <TableRow>
+                                    <StyledTableCell>Queue Number</StyledTableCell>
+                                    <StyledTableCell align="left">Credit Card Number</StyledTableCell>
+                                    <StyledTableCell>Approve <Button onClick={() => handleApproveAll()}>Approve All</Button></StyledTableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {data.map((row) => (
+                                    <StyledTableRow key={row.transactionID}>
+                                        <StyledTableCell component="th" scope="row">
+                                            {row.queueNumber}
+                                        </StyledTableCell>
+                                        <StyledTableCell align="left">{row.creditCardNumber}</StyledTableCell>
+                                        <StyledTableCell align="left">
+                                            <input type="checkbox" onChange={() => handleCheckboxChange(row)} />
+                                            {row.checked && <Button onClick={() => handleApprove(row)}>Approve</Button>
+                                            }
+                                        </StyledTableCell>
+                                    </StyledTableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </TableContainer>
+            </div>
         </>
     );
 }
