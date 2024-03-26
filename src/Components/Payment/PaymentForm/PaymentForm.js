@@ -23,6 +23,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     //console.log(paymentId);
     // console.log(currentCard);   
+    useEffect(() => {}, [currentCard]);
 
     const handleOpen = () => {
         const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
@@ -192,13 +193,13 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
         });
     }, []);
 
-
+    
     return (
         <form className="PaymentForm" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
             <div className="backArrowContainer" onClick={(event) => billingCompleted(false)}>
                 <img src={leftArrow} alt="" className="PaymentBackArrow"></img>
             </div>
-            {/* {JSON.stringify(currentCard)} */}
+            {JSON.stringify(currentCard)}
             <div className="BillingFormHeader">
                 <span className="FormTitle">Payment</span>
                 <span className="FormDetail">Add your card details</span>
