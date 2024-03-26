@@ -21,10 +21,20 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     const paymentRequestId = paymentId;
 
-    console.log(paymentId);
+    //console.log(paymentId);
+    //console.log(currentCard);   
 
     const handleOpen = () => {
-        setOpen(true);
+        const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
+        let formValid = true;
+        // console.log(elements);
+        elements.forEach(element => {
+            console.log(element.style.display);
+            formValid = formValid && (element.style.display == "block");
+        });
+        if (formValid) {
+            setOpen(true);
+        }
     };
 
     const handleClose = () => {
@@ -33,7 +43,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=2`;
+            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=1`;
             const response = await fetch(`${apiUrl}`);
             const data = await response.json();
             setCreditCardData(data);
@@ -49,7 +59,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
                 inputPin: inputPin,
                 paymentRequestId: paymentRequestId
             };
-            const requestParam = 4182433449341033;
+            const requestParam = currentCard.cardnumber;
 
             const response = await fetch(`http://localhost:8090/transaction/initiate?cardNumber=${requestParam}`, {
                 method: 'POST',
@@ -60,6 +70,8 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
             });
             const data = await response.json();
             console.log(data);
+
+            paymentCompleted(true);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -161,19 +173,6 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
     const handleSubmit = (event) => {
         event.preventDefault();
 
-        const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
-        let formValid = true;
-        // console.log(elements);
-        elements.forEach(element => {
-            console.log(element.style.display);
-            formValid = formValid && (element.style.display == "block");
-        });
-
-        // console.log(formValid);
-
-        if (formValid) {
-            paymentCompleted(true);
-        }
     };
 
     const handleKeyDown = (event) => {
@@ -191,7 +190,8 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
         elements.forEach(element => {
             element.style.display = "none";
         });
-    }, [currentCard]);
+    }, []);
+
 
     return (
         <form className="PaymentForm" onSubmit={handleSubmit} onKeyDown={handleKeyDown}>
@@ -206,9 +206,12 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
             <div className="BillingBody">
                 <div className="CardChoice"></div>
                 <CreditCardSlideshow passCardToParent={setCurrentCard}>
-                    { creditCardData.map(row => (
-                        <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder="John Doe" validfrom="02/24" validthru="02/29" />
-                    ))};
+                    { creditCardData.map(row => {
+                        if (row.activationStatus == "ACTIVATED") {
+                            return <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder="John Doe" validfrom="02/24" validthru="02/29" />;
+                        }
+                        return;
+                    })}
                 </CreditCardSlideshow>
                 <div className="CardDetails">
                     <label for="cardholder" className="BillingLabel">Cardholder's Name</label>
