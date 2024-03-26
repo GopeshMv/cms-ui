@@ -15,7 +15,9 @@ function Login({ handleLoginToggle, isLoginActive }) {
         e.preventDefault();
 
         const fetchData = async () => {
-            const apiUrl = `http://localhost:8090/user/Login`;
+
+            const apiUrl = (alignment === 'user') ? `http://localhost:8090/user/Login` : `http://localhost:8090/admin/adminLogin`;
+
 
             const params = new URLSearchParams({
                 email: email,
@@ -31,6 +33,7 @@ function Login({ handleLoginToggle, isLoginActive }) {
                   });
                   if(response){
                     console.log(response);
+
                   }
                   var data = await response.text();
                   if (response.ok && data.includes("Login Successful")) {
@@ -43,6 +46,7 @@ function Login({ handleLoginToggle, isLoginActive }) {
                   } else{ 
                       console.log("Enter valid email and password!");
                   }
+
                 if (!response.ok) {
                     throw new Error('Failed to fetch data');
                 }
