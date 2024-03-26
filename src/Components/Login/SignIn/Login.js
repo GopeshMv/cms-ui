@@ -10,6 +10,7 @@ function Login({ handleLoginToggle, isLoginActive }) {
     const [data, setData] = useState([]);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [isLogin, setIsLogin] = useState(false);
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -27,8 +28,9 @@ function Login({ handleLoginToggle, isLoginActive }) {
                 const response = await fetch(`${apiUrl}?${params}`, {
                     method: 'POST',
                     headers: {
-                      'Content-Type': 'application/json',
+                        'Content-Type': 'application/json',
                     },
+
                     body: JSON.stringify({ email, password }),  
                   });
                   if(response){
@@ -69,9 +71,9 @@ function Login({ handleLoginToggle, isLoginActive }) {
         setAlignment(newAlignment);
     };
 
-    
+
     const handleChange = (e) => {
-        console.log(email,password);
+        console.log(email, password);
         const { name, value } = e.target;
         setFormData({
             ...formData, [name]: value
@@ -91,15 +93,12 @@ function Login({ handleLoginToggle, isLoginActive }) {
 
         if (!formData.password.trim()) {
             validationErrors.password = "Password is required!";
-        } else if (!/(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()])(?=\\S+$).{8,20}$/.test(formData.password)) {
-            validationErrors.password = "Password format is invalid!";
-            console.log("Enter password satisfying the conditions");
         }
 
         setErrors(validationErrors)
 
         if (Object.keys(validationErrors).length === 0) {
-            console.log("Format is fine");
+            console.log("Format is fine, check the value");
             ;
         }
     }
@@ -137,11 +136,11 @@ function Login({ handleLoginToggle, isLoginActive }) {
                     <div className="CardDetails">
                         <label for="email" className="BillingLabel">Email ID</label>
                         <input name="email" className="BillingTextBox" onChange={(e) => { handleChange(e); setEmail(e.target.value); }}></input>
-                        <div className="error-message">{errors.email && <div><span>{errors.email}</span><br/><br/></div>} </div>
+                        <div className="error-message">{errors.email && <div><span>{errors.email}</span><br /><br/></div>} </div>
 
                         <label for="password" className="BillingLabel">Password</label>
                         <input name="password" className="BillingTextBox" type="password" onChange={(e) => { handleChange(e); setPassword(e.target.value); }}></input>
-                        <div className="error-message">{errors.password && <div><span>{errors.password}</span><br/><br/></div>} </div>
+                        <div className="error-message">{errors.password && <div><span>{errors.password}</span><br/><br /></div>} </div>
 
                         <p>Not an Existing User? <button onClick={handleLoginToggle} className="smolRegister">Register</button></p>
                         <button type="submit" className="SignIn">Sign In</button>
