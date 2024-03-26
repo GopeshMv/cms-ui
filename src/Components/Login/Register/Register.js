@@ -7,6 +7,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
     const [alignment, setAlignment] = React.useState('customer');
     const [email, setEmail] = useState('');
     const [accountPassword, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
     const [name, setName] = useState('');
     const [phone, setPhone] = useState('');
     const [address, setAddress] = useState('');
@@ -19,7 +20,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
             const apiUrl = (alignment === 'customer') ? `http://localhost:8090/user/customer` : `http://localhost:8090/user/merchant`;
 
             const params = {
-                userId: 0,
+                id: 0,
                 name: name,
                 address: address,
                 email: email,
@@ -116,7 +117,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
             console.log("Enter password satisfying the conditions");
         }
 
-        if (formData.confirmPassword !== formData.password) {
+        if (formData.confirmPassword != formData.password) {
             validationErrors.confirmPassword = "Does not match the password!";
         }
 
@@ -179,7 +180,7 @@ function Register({ handleLoginToggle, isRegisterActive }) {
                         <div className="error-message">{errors.password && <div><span>{errors.password}</span><br /></div>} </div>
 
                         <label for="confirmPassword" className="BillingLabel">Confirm Password</label>
-                        <input name="confirmPassword" className="BillingTextBox" type="password" />
+                        <input name="confirmPassword" className="BillingTextBox" type="password" onChange={(e) => { handleChange(e); setConfirmPassword(e.target.value); }} />
                         <div className="error-message">{errors.confirmPassword && <div><span>{errors.confirmPassword}</span><br /></div>} </div>
 
                         <p>Existing User? <button onClick={handleLoginToggle} className="smolLogin">Login</button></p>
