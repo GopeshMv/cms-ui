@@ -50,7 +50,7 @@ function SideNav() {
                     
                 </div>
                 <div className="BottomLinks">
-                    <div className="Link">
+                    <div className="Link" onClick={() => {localStorage.clear(); window.location.href = "/";}}>
                         <div className="Link-icon">
                             <img src={logout_logo} alt=""></img>
                         </div>

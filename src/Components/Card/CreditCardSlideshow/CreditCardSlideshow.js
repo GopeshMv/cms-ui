@@ -10,8 +10,8 @@ function CreditCardSlideshow({ children, passCardToParent }) {
     
     useEffect(() => {
         setCurrentCard(children[currentCardIndex]?.props);
-        console.log(currentCard);
-    }, [children]);
+        // console.log(currentCard);
+    }, [currentCardIndex]);
 
     
     var totalCards = 0;
@@ -31,6 +31,8 @@ function CreditCardSlideshow({ children, passCardToParent }) {
                 setCurrentCardIndex(currentCardIndex + 1);
             }
         }
+        // setCurrentCard(children[currentCardIndex]?.props);
+        // passCardToParent(currentCard);
     };
 
 

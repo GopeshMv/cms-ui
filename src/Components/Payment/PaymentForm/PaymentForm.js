@@ -22,14 +22,14 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
     const paymentRequestId = paymentId;
 
     //console.log(paymentId);
-    //console.log(currentCard);   
+    // console.log(currentCard);   
 
     const handleOpen = () => {
         const elements = document.querySelectorAll(".verified-icon, .verified-icon-small");
         let formValid = true;
         // console.log(elements);
         elements.forEach(element => {
-            console.log(element.style.display);
+            // console.log(element.style.display);
             formValid = formValid && (element.style.display == "block");
         });
         if (formValid) {
@@ -43,7 +43,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
 
     useEffect(() => {
         const fetchData = async () => {
-            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=1`;
+            const apiUrl = `http://localhost:8090/creditcard/creditCard/user?userId=${localStorage.id}`;
             const response = await fetch(`${apiUrl}`);
             const data = await response.json();
             setCreditCardData(data);
@@ -51,7 +51,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
         fetchData();
     }, []);
 
-    console.log(creditCardData);
+    // console.log(creditCardData);
 
     const postPayment = async (inputPin) => {
         try {

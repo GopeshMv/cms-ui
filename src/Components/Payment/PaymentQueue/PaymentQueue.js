@@ -41,7 +41,7 @@ function PaymentQueue({ setAmount, setMerchant }) {
     useEffect(() => {
         const fetchData = async () => {
             const apiUrl = `http://localhost:8090/user/paymentRequests?userId`;
-            const apiParams = '1';
+            const apiParams = localStorage.id;
             const response = await fetch(`${apiUrl}=${apiParams}`);
             const responseData = await response.json();
             if (response.ok) {
@@ -64,6 +64,8 @@ function PaymentQueue({ setAmount, setMerchant }) {
         }
     };
 
+    console.log(data);
+
     return (
         <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -78,7 +80,8 @@ function PaymentQueue({ setAmount, setMerchant }) {
                 </TableHead>
                 <TableBody>
                     {data.map((row) => {
-                        if (row.status != "PENDING") return;
+                        // if (row.status != "PENDING") return;
+                        console.log(row);
                         
                         <StyledTableRow key={row.paymentRequestId}>
                             <StyledTableCell><Checkbox checked={row.paymentRequestId === selectedRow} onChange={() => handleClick(row)} /></StyledTableCell>
