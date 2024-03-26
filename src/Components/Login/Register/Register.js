@@ -172,11 +172,11 @@ function Register({ handleLoginToggle, isRegisterActive }) {
                         <div className="error-message">{errors.password && <div><span>{errors.password}</span><br /></div>} </div>
 
                         <label for="confirmPassword" className="BillingLabel">Confirm Password</label>
-                        <input name="confirmPassword" className="BillingTextBox" type="password" />
+                        <input name="confirmPassword" className="BillingTextBox" type="password" onChange={(e) => { handleChange(e); setPassword(e.target.value); }}/>
                         <div className="error-message">{errors.confirmPassword && <div><span>{errors.confirmPassword}</span><br /></div>} </div>
 
                         <p>Existing User? <button onClick={handleLoginToggle} className="smolLogin">Login</button></p>
-                        <button type="submit" className="SignIn">
+                        <button type="submit" className="SignIn" disabled={formData.password !== formData.confirmPassword}>
                             Register
                         </button>
                         {/* <button type="submit" className="SignIn">Register</button> */}
