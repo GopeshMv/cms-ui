@@ -1,10 +1,13 @@
 import React from "react";
+import QuickView from "./QuickView/QuickView";
+import "./Account.css";
+
 
 function Account() {
     return (
-        <>
-            account
-        </>
+        <div className="account">
+            <QuickView/>
+        </div>
     );
 }
 
