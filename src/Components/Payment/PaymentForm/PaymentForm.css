@@ -9,17 +9,57 @@
     align-items: center;
     justify-content: center;
     padding: 10px;
-    gap: 20px;
 
     width: 500px;
     height: 100%;
     /* position: relative; */
 
     border-radius: 10%;
+/*     border-radius: 10px; */
+/*     position: relative; */
 
     background: #E3E5FA;
+        
 }
+
+.PaymentForm * {
+    font-family: 'JetBrains Mono';
+    font-style: normal;
+    user-select: none;
+}
+
+.BillingBody {
+    gap: 0px;
+}
+
+.backArrowContainer {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.PaymentBackArrow {
+    width: 30px;
+}
+
+.backArrowContainer:hover {
+    border: 1px black solid;
+    background-color: white;
+    transition: 100ms ease-out;
+    transition-property: background-color;
+}
+
 
 .Paynow {
     margin-top: 20px;
+}
+
+.BillingNext {
+    width: 100px;
 }

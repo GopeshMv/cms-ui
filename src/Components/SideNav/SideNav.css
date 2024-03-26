@@ -16,6 +16,10 @@
 
 }
 
+.SideNav * {
+    user-select: none;
+}
+
 .Logo {
     width: 90%;
     height: 77px;
