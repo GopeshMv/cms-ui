@@ -258,3 +258,11 @@
     width: 85px;
     transform: translate(0%, 30%);
 }
+
+.card-cvv {
+    position: absolute;
+    color: white;
+    font-style: italic;
+    bottom: 2px;
+    left: 200px;
+}

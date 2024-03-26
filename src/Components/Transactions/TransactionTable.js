@@ -70,6 +70,7 @@ function TransactionTable() {
                 body: JSON.stringify(payload),
             });
             const responseData = await response.json();
+            if (!response.ok) return;
             const result = xml2js.xml2js(responseData.invoiceBody, { compact: true, spaces: 4 });
             setInvoiceData(result.invoice);
 

@@ -219,7 +219,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
                 <CreditCardSlideshow passCardToParent={setCurrentCard}>
                     { creditCardData.map(row => {
                         if (row.activationStatus == "ACTIVATED") {
-                            return <CreditCard key={row.cardNumber} bank="boa" vendor={row.vendor} cardnumber={row.cardNumber} cardholder={localStorage.getItem("name")} validfrom={formatDate(row.expireDate, 5)} validthru={formatDate(row.expireDate)} />;
+                            return <CreditCard key={row.cardNumber} bank={row.bank} vendor={row.vendor} cardnumber={row.cardNumber} cardholder={localStorage.getItem("name")} validfrom={formatDate(row.expireDate, 5)} validthru={formatDate(row.expireDate)} cvv={row.cvv}/>;
                         }
                         return;
                     })}
@@ -243,7 +243,7 @@ function PaymentForm({ billingCompleted, paymentCompleted, amount, merchant }) {
                         <div className="BillingDualItem">
                             <label for="cvv" className="BillingLabel">CVV</label>
                             <div className="invalid-warning">*CVV doesn't match</div>
-                            <input type="password" id="cvv" name="cvv" className="BillingSmallTextBox" value={formattedCvv} onChange={handleCvvChange} onBlur={(event) => handleCardinputBlur(event, "123")}></input>
+                            <input type="password" id="cvv" name="cvv" className="BillingSmallTextBox" value={formattedCvv} onChange={handleCvvChange} onBlur={(event) => handleCardinputBlur(event, currentCard.cvv)}></input>
                             <img src={verifiedIcon} className="verified-icon"></img>
                         </div>
                     </div>

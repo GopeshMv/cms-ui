@@ -24,6 +24,19 @@ function SideNav() {
         fetchData();
     }, []);
 
+    useEffect(() => {
+        const fetchData = async () => {
+            const apiUrl = `http://localhost:8090/user/account`;
+            const apiPath = localStorage.getItem("id");
+            const response = await fetch(`${apiUrl}?userId=${apiPath}`);
+            const responseData = await response.json();
+            if (response.ok) {
+                localStorage.setItem("bank", responseData["bankType"]);
+                localStorage.setItem("accountId", responseData["accountId"]);
+            }
+        }
+        fetchData();
+    }, []);
     return (
         <div className="SideNav">
             <div className="Logo">
