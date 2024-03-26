@@ -14,8 +14,9 @@
     height: 100%;
     /* position: relative; */
 
-    border-radius: 10px;
-    position: relative;
+    border-radius: 10%;
+/*     border-radius: 10px; */
+/*     position: relative; */
 
     background: #E3E5FA;
         

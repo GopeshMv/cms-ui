@@ -262,7 +262,7 @@
     justify-content: center;
     align-items: center;
     padding: 10px 0px;
-    gap: 10px;
+    /* gap: 10px; */
 
     width: 407px;
     height: 49px;
@@ -285,6 +285,7 @@
     font-size: 20px;
     line-height: 29px;
     /* identical to box height */
+    
 
     color: #FFFFFF;
 
