@@ -46,7 +46,9 @@ function QuickView() {
 
     const fetchDetail = async () => {
         try {
-            const response = await axios.get(`http://localhost:8090/account/1`);
+            const apiUrl = `http://localhost:8090/account/`;
+            const apiPath = localStorage.getItem("id");
+            const response = await axios.get(`${apiUrl}${apiPath}`);
             console.log('Response:', response); // Log the full response
             const name = response.data.user.name;
             const balance = response.data.balance;
@@ -60,7 +62,8 @@ function QuickView() {
             console.log(address, email, phone);
             setDetailList({ name: name, balance: balance, openDate: openDate, password: password, type: type, bankType: bankType, phone: phone, email: email, address: address })
 
-            const response2 = await axios.get(`http://localhost:8090/account/LastDate/1`);
+            const apiUrl2 = `http://localhost:8090/account/LastDate/`;
+            const response2 = await axios.get(`${apiUrl2}${apiPath}`);
             console.log('Response:', response2); // Log the full response
             const amount = response2.data.amount;
             const date = response2.data.date;
