@@ -99,36 +99,36 @@ function Merchant() {
         postPaymentRequest();
     };
 
-    useEffect(() => {
-        const fetchInvoice = async () => {
-            const apiUrl = `http://localhost:8090/user/merchant/requestInvoice`;
-            const payload = {
-                transactionID: '1'
-            };
-            const response = await fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'content-type': 'application/json',
-                },
-                body: JSON.stringify(payload),
-            });
-            const responseData = await response.json();
-            const result = xml2js.xml2js(responseData.invoiceBody, { compact: true, spaces: 4 });
-            setInvoiceData(result.invoice);
+    // useEffect(() => {
+    //     const fetchInvoice = async () => {
+    //         const apiUrl = `http://localhost:8090/user/merchant/requestInvoice`;
+    //         const payload = {
+    //             transactionID: '1'
+    //         };
+    //         const response = await fetch(apiUrl, {
+    //             method: 'POST',
+    //             headers: {
+    //                 'content-type': 'application/json',
+    //             },
+    //             body: JSON.stringify(payload),
+    //         });
+    //         const responseData = await response.json();
+    //         const result = xml2js.xml2js(responseData.invoiceBody, { compact: true, spaces: 4 });
+    //         setInvoiceData(result.invoice);
 
-            if (result.invoice) {
-                const invoiceDataResult = {
-                    customerName: result.invoice.customer.name._text,
-                    customerAddress: result.invoice.customer.address._text,
-                    transactionAmount: result.invoice.transaction.amount._text,
-                    transactionDate: result.invoice.transaction.date._text,
-                    transactionMerchant: result.invoice.transaction.merchant._text,
-                };
-                setProcessedInvoiceData(invoiceDataResult);
-            }
-        };
-        fetchInvoice();
-    }, []);
+    //         if (result.invoice) {
+    //             const invoiceDataResult = {
+    //                 customerName: result.invoice.customer.name._text,
+    //                 customerAddress: result.invoice.customer.address._text,
+    //                 transactionAmount: result.invoice.transaction.amount._text,
+    //                 transactionDate: result.invoice.transaction.date._text,
+    //                 transactionMerchant: result.invoice.transaction.merchant._text,
+    //             };
+    //             setProcessedInvoiceData(invoiceDataResult);
+    //         }
+    //     };
+    //     fetchInvoice();
+    // }, []);
 
     function generatePDF() {
         // Create a new jsPDF instance
@@ -313,7 +313,7 @@ function Merchant() {
                                     <StyledTableCell align="left">{row.topic}</StyledTableCell>
                                     <StyledTableCell align="left">Rs.{row.requestAmount}</StyledTableCell>
                                     <StyledTableCell align="left">
-                                        <Button onClick={generatePDF} disabled={invoiceButton}>Generate Invoice</Button>
+                                        <Button disabled={invoiceButton}>Generate Invoice</Button>
                                     </StyledTableCell>
                                 </StyledTableRow>
                             ))}
